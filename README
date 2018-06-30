@@ -1,0 +1,42 @@
+Hexapoda
+========
+
+Material:
+6 x 2 Servo Motors
+I2C to PWM board
+Wemos ESP board
+
+Fusion360 robot skeleton:
+
+
+Programming the board
+---------------------
+
+Use _esptool_ (https://github.com/espressif/esptool)
+Get esp-idf: https://github.com/espressif/esp-idf.git
+
+
+Once the board is plugged in dmesg should output the following (In a VM, the USB controller CP2102 in Devices/USB must be enabled):
+
+ usb 2-2: new full-speed USB device number 3 using ohci-pci
+ usb 2-2: New USB device found, idVendor=10c4, idProduct=ea60
+ usb 2-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+ usb 2-2: Product: CP2102 USB to UART Bridge Controller
+ usb 2-2: Manufacturer: Silicon Labs
+ usb 2-2: SerialNumber: 0001
+ usbcore: registered new interface driver usbserial
+ usbcore: registered new interface driver usbserial_generic
+ usbserial: USB Serial support registered for generic
+ usbcore: registered new interface driver cp210x
+ usbserial: USB Serial support registered for cp210x
+ cp210x 2-2:1.0: cp210x converter detected
+ usb 2-2: cp210x converter now attached to ttyUSB0
+
+After building the .elf file, the following command must be executed
+python "./esptool.py" \
+ --chip esp32 \
+ elf2image \
+ --flash_mode "dio" \
+ --flash_freq "80m" \
+ --flash_size "4MB" \
+ -o "out.bin" "out.elf"
