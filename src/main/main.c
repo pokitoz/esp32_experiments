@@ -9,13 +9,15 @@
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+
 #include "esp_system.h"
 #include "esp_spi_flash.h"
-
+#include "esp_log.h"
+#include "nvs_flash.h"
 
 void app_main()
 {
-    printf("Hello world!\n");
+    printf("Hello ll world!\n");
 
     /* Print chip information */
     esp_chip_info_t chip_info;
@@ -36,5 +38,6 @@ void app_main()
     }
     printf("Restarting now.\n");
     fflush(stdout);
+
     esp_restart();
 }
