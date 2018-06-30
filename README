@@ -3,10 +3,11 @@ Hexapoda
 
 Material:
 6 x 2 Servo Motors
-I2C to PWM board
-Wemos ESP board
+I2C to PWM board: PCA9685 https://www.nxp.com/docs/en/data-sheet/PCA9685.pdf
+Wemos ESP board https://www.wemos.cc/
 
-Fusion360 robot skeleton:
+
+Fusion360 robot skeleton: To be uploaded
 
 
 Programming the board
@@ -19,7 +20,6 @@ Get esp-idf: https://github.com/espressif/esp-idf.git
 Get the toolchain: https://dl.espressif.com/doc/esp-idf/latest/get-started/linux-setup.html
 The variable IDF_PATH should be exported!
 The PATH should contain the path to the toolchain xtensa-esp32-elf-
-
 
 Once the board is plugged in dmesg should output the following (In a VM, the USB controller CP2102 in Devices/USB must be enabled):
 
