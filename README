@@ -12,8 +12,13 @@ Fusion360 robot skeleton:
 Programming the board
 ---------------------
 
+Useful link: https://dl.espressif.com/doc/esp-idf/latest/get-started/index.html
+
 Use _esptool_ (https://github.com/espressif/esptool)
 Get esp-idf: https://github.com/espressif/esp-idf.git
+Get the toolchain: https://dl.espressif.com/doc/esp-idf/latest/get-started/linux-setup.html
+The variable IDF_PATH should be exported!
+The PATH should contain the path to the toolchain xtensa-esp32-elf-
 
 
 Once the board is plugged in dmesg should output the following (In a VM, the USB controller CP2102 in Devices/USB must be enabled):
@@ -32,7 +37,7 @@ Once the board is plugged in dmesg should output the following (In a VM, the USB
  cp210x 2-2:1.0: cp210x converter detected
  usb 2-2: cp210x converter now attached to ttyUSB0
 
-After building the .elf file, the following command must be executed
+After building the .elf file, the following command can be executed
 python "./esptool.py" \
  --chip esp32 \
  elf2image \
@@ -40,3 +45,7 @@ python "./esptool.py" \
  --flash_freq "80m" \
  --flash_size "4MB" \
  -o "out.bin" "out.elf"
+
+However, using the isp make file, it is easy to flash and start the monitor as follow
+make flash
+make monitor
