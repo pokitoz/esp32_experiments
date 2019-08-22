@@ -2,50 +2,64 @@ Hexapoda
 ========
 
 Material:
-6 x 2 Servo Motors
-I2C to PWM board: PCA9685 https://www.nxp.com/docs/en/data-sheet/PCA9685.pdf
-Wemos ESP board https://www.wemos.cc/
+- 6 x 2 Servo Motors
+- I2C to PWM board: PCA9685 https://www.nxp.com/docs/en/data-sheet/PCA9685.pdf
+- Wemos ESP board https://www.wemos.cc/
+- Fusion360 robot skeleton using birch plates
 
 
-Fusion360 robot skeleton: To be uploaded
-
-
-Programming the board
----------------------
+Setup
+-----
 
 Useful link: https://dl.espressif.com/doc/esp-idf/latest/get-started/index.html
 
-Use _esptool_ (https://github.com/espressif/esptool)
-Get esp-idf: https://github.com/espressif/esp-idf.git
-Get the toolchain: https://dl.espressif.com/doc/esp-idf/latest/get-started/linux-setup.html
-The variable IDF_PATH should be exported!
-The PATH should contain the path to the toolchain xtensa-esp32-elf-
+Get the followings:
+- Use _esptool_ (https://github.com/espressif/esptool)
+- Get esp-idf: https://github.com/espressif/esp-idf.git
+- Get the toolchain: https://dl.espressif.com/doc/esp-idf/latest/get-started/linux-setup.html
 
-Once the board is plugged in dmesg should output the following (In a VM, the USB controller CP2102 in Devices/USB must be enabled):
+Setup the variables:
+- export IDF_PATH to the repository cloned: `esp-idf`.
+- export the path to toolchain `xtensa-esp32-elf-` in the PATH.
 
- usb 2-2: new full-speed USB device number 3 using ohci-pci
- usb 2-2: New USB device found, idVendor=10c4, idProduct=ea60
- usb 2-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
- usb 2-2: Product: CP2102 USB to UART Bridge Controller
- usb 2-2: Manufacturer: Silicon Labs
- usb 2-2: SerialNumber: 0001
- usbcore: registered new interface driver usbserial
- usbcore: registered new interface driver usbserial_generic
- usbserial: USB Serial support registered for generic
- usbcore: registered new interface driver cp210x
- usbserial: USB Serial support registered for cp210x
- cp210x 2-2:1.0: cp210x converter detected
- usb 2-2: cp210x converter now attached to ttyUSB0
+Build the project
+-----------------
 
-After building the .elf file, the following command can be executed
-python "./esptool.py" \
- --chip esp32 \
- elf2image \
- --flash_mode "dio" \
- --flash_freq "80m" \
- --flash_size "4MB" \
- -o "out.bin" "out.elf"
+Once the project is setup, here are the commands to build it:
+```
+cd src
+. ${IDF_PATH}/add_path.sh
+make
+```
 
-However, using the isp make file, it is easy to flash and start the monitor as follow
+Program the board
+-----------------
+
+Once the board is plugged in, `dmesg` should output the following:
+
+_Note: In a VM, the USB controller CP2102 in Devices/USB must be enabled_
+
+```
+usb 2-2: new full-speed USB device number 3 using ohci-pci
+usb 2-2: New USB device found, idVendor=10c4, idProduct=ea60
+usb 2-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+usb 2-2: Product: CP2102 USB to UART Bridge Controller
+usb 2-2: Manufacturer: Silicon Labs
+usb 2-2: SerialNumber: 0001
+usbcore: registered new interface driver usbserial
+usbcore: registered new interface driver usbserial_generic
+usbserial: USB Serial support registered for generic
+usbcore: registered new interface driver cp210x
+usbserial: USB Serial support registered for cp210x
+cp210x 2-2:1.0: cp210x converter detected
+usb 2-2: cp210x converter now attached to ttyUSB0
+```
+
+After building the .elf file, the following command can be executed using the
+isp makefile, to flash and start the monitor:
+```
 make flash
 make monitor
+```
+
+_Note: Use CTRL+] to escape the monitor._
