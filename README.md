@@ -1,11 +1,10 @@
-Hexapoda
-========
+ESP32 Experiments
+=================
 
-Material:
-- 6 x 2 Servo Motors
-- I2C to PWM board: PCA9685 https://www.nxp.com/docs/en/data-sheet/PCA9685.pdf
-- Wemos ESP board https://www.wemos.cc/
-- Fusion360 robot skeleton using birch plates
+- Wemos Lolin ESP32 OLED Display Module (https://www.wemos.cc/)
+
+References:
+- https://diyprojects.io/unpacking-wemos-esp32-lolin-clone-0-96-ssd1306-monochrome-oled-display/#.XV7Upvwo9wd
 
 
 Setup
