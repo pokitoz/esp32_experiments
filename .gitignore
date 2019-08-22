@@ -1,3 +1,6 @@
+# Build
+src/build
+
 # Prerequisites
 *.d
 
