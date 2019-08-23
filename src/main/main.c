@@ -8,7 +8,6 @@
 */
 
 #include <stdio.h>
-#include "wifi.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
